@@ -24,13 +24,13 @@ class CommitteeForm(forms.ModelForm):
         exclude = ['event', 'id']
 
 
-'''
+
 class UserForm2(forms.ModelForm):
 
     class Meta:
         model = Delegate
-        fields = ('first_name', 'last_name')
-'''
+        fields = ('first_name', 'last_name', 'acheivement', 'name')
+
 
 
 class UserImageForm(forms.ModelForm):

@@ -272,6 +272,27 @@
         </div>
     </div>
 
+    <div id="myModal_user_info" class="modal fade">
+    <div class="modal-dialog modal-newsletter">
+        <div class="modal-content">
+    
+            <div class="modal-header">
+                <h4>Edit info</h4>
+            </div>
+            <div class="modal-body">
+                <form id="update_user_form" action="/user/editinfo" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ userform.as_p }}
+                    <input type="submit">
+    
+                </form>
+            </div>
+    
+    
+        </div>
+    </div>
+    </div>
+
     <div class="profile-page">
         <div class="page-header header-filter" data-parallax="true"
             style="background-image:url('https://demos.creative-tim.com/bs3/material-kit/assets/img/examples/city.jpg');"></div>
@@ -305,7 +326,7 @@
                                         <a href="{% url 'password_change' %}" class="dropdown-item">
                                             <i class="material-icons">layers</i> Change password
                                         </a>
-                                        <a href="{% url 'change_password'%}"
+                                        <a role="button" id="editInfo" data-toggle="modal" data-target="#myModal_user_info""
                                             class="dropdown-item">
                                             <i class="material-icons">content_paste</i> edit profile
                                         </a>

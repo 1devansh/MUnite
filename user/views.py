@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 # //, UserImageForm, UserForm2
-from .forms import UserRegisterForm, CommitteeForm, UserImageForm
+from .forms import UserRegisterForm, CommitteeForm, UserImageForm, UserForm2
 from django.template.loader import get_template
 from django.template import Context
 from django.utils import timezone
@@ -135,6 +135,7 @@ def loggedin(request, username):
     name = fname + ' ' + lname
 
     imageForm = UserImageForm()
+    userEditForm = UserForm2()
 
     throw_to_frontend = {
         'title': 'Profile',
@@ -146,6 +147,7 @@ def loggedin(request, username):
         'profile_pic': d.profile_pic,
         'edit':  canedit,
         'imageform': imageForm,
+        'userform': userEditForm,
     }
     return render(request, 'user/profile.html', throw_to_frontend)
 
@@ -164,7 +166,6 @@ def committee(request, username):
 
 # EDITING USER PROFILE PICTURE
 
-
 def edit_profile(request):
     temp = str(request.user)
     user_profile = Delegate.objects.get(name=temp)
@@ -180,7 +181,6 @@ def edit_profile(request):
             
             if 'profile_pic' in request.FILES:
                 #userob = request.user
-                
                 user_profile.profile_pic = request.FILES['profile_pic']
             
             user_profile.save()
@@ -191,8 +191,28 @@ def edit_profile(request):
     # return redirect(loggedin(request, request.user))
     return redirect(f"/user/{request.user.username}")
 
-# Returning create_event page
 
+# EDITING USER INFORMATION
+def edit_user_info(request):
+    temp = str(request.user)
+    user_profile = Delegate.objects.get(name=temp)
+
+    if request.method == 'POST':
+        update_user_form = UserForm2(data=request.POST, instance=request.user)
+
+        if update_user_form.is_valid():
+            user_profile.first_name = update_user_form.cleaned_data['first_name']
+            user_profile.last_name = update_user_form.cleaned_data['last_name']
+            user_profile.name = update_user_form.cleaned_data['name']
+            user_profile.acheivement = update_user_form.cleaned_data['acheivement']
+        
+            user_profile.save()
+    
+        else:
+            print(update_user_form.errors)
+    return redirect(f"/user/{request.user.username}")
+
+# Returning create_event page
 
 def create_event(request, username):
     return render(request, 'user/create_event.html', {'title': 'Create event'})

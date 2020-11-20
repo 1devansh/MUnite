@@ -12,6 +12,7 @@ urlpatterns = [
     path('event/<str:event_name>', views.show_event, name='event'),
     path('submitted', views.save_event, name='save_event'),
     path('user/edit', views.edit_profile, name='edit_profile'),
+    path('user/editinfo', views.edit_user_info, name='edit_info'),
     path('user/<str:username>', views.loggedin, name='user'),
     path('create-event/<str:username>', views.committee,  name='create_event'),
     path('change_password', views.password_change, name='change_password'),
