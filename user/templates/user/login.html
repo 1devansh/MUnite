@@ -1,0 +1,62 @@
+{% extends "user/index.html" %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'user/login.css' %}" />
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block start %}
+
+<div class="page-header header-filter"
+  style="background-image: url('https://images.unsplash.com/photo-1508144753681-9986d4df99b3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b3cf0ccc6287057b5a71b0ecdd6cf3f4&auto=format&fit=crop&w=6000&q=80 6000w'); background-size: cover; background-position: top center;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+        <div class="card card-login">
+          <form class="form" method="POST">
+            <div class="card-header card-header-primary text-center">
+              <h4 class="card-title">Login</h4>
+              <div class="social-line">
+                <a href="#pablo" class="btn btn-just-icon btn-link">
+                  <i class="fa fa-facebook-square"></i>
+                </a>
+                <a href="#pablo" class="btn btn-just-icon btn-link">
+                  <i class="fa fa-twitter"></i>
+                </a>
+                <a href="#pablo" class="btn btn-just-icon btn-link">
+                  <i class="fa fa-google-plus"></i>
+                </a>
+              </div>
+            </div>
+            <p class="description text-center">Or Be Classical</p>
+            <div class="card-body">
+              {% csrf_token %}
+              <fieldset class="form-group">
+                {{ form|crispy}}
+              </fieldset>
+              <button class="btn btn-primary" type="submit" style="color: indianred;">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+ <div class="content-section col-md-8 col-md-offset-2">
+  <center>
+  <form class="form-group" method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      {{ form|crispy}}
+    </fieldset>
+   <center>
+    <button style="background: black; font-size: 2rem; padding:1%;" class="btn btn-dark" type="submit"><span class="glyphicon glyphicon-log-in"></span> &nbsp; login</button>
+  </center>
+  <br/>
+  <sub><a href="{% url 'register' %}" class="subtitle-text">Don't have account, sign up</a></sub>
+  </form>
+</center>
+ </div>
+-->
+{% endblock start %}

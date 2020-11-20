@@ -1,0 +1,402 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="project">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="language" content="English">
+  <meta name="author">
+
+  <title>{{title}}</title>
+
+
+  <!-- bootstrap file -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- bootstrap file-->
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  <!-- main css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'user/style.css' %}" />
+  {% block styles %}
+  {% endblock %}
+  <!-- message here -->
+
+  {% if messages %}
+  {% for message in messages %}
+
+  <script>
+    alert("{{ message }}");
+  </script>
+
+  {% endfor %}
+  {% endif %}
+
+  <!--_______________________________________________-->
+
+
+
+</head>
+
+<body>
+  
+
+
+  <header class="row">
+
+    <!-- navbar-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" class="styleheader" href="{% url 'index' %}">MUnite.</a>
+        </div>
+        <div class="collapse navbar-collapse" id="mainNavBar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'index' %}">Home</a></li>
+
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'user' username=user %}">{{ user }}</a></li>
+            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> &nbsp; Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> &nbsp; Sign up</a></li>
+            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> &nbsp; Log in</a></li>
+            {% endif %}
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  
+  
+    {% block start %}
+    {% if user.is_authenticated %}
+    <br><br><br>
+    <div class="container">
+      <h1>Welcome, {{ user }}</h1>
+      <h4>Our platfrom MUnite is for MUN oraganizers and delegates who want to participate...</h4>
+      <br>
+      <h4>Create your own MUN event here: </h4>
+      <form action="{% url 'create_event' username=user %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success" name="submit">Create Event</button>
+      </form>
+      <br>
+      <h1>Your Events</h1>
+      {% if myEvents %}
+        {% for e in myEvents %}
+
+            <h4>{{ e }}</h4>
+            <a class="btn btn-primary" role="button" id="changePic" >Edit Event</a>
+            <a class="btn btn-danger" role="button" id="changePic" >Delete Event</a>
+            <br>
+        {% endfor %}
+      {% else %}
+        <h4>You have not created any events yet.</h4>
+      {% endif %}
+      <br>
+
+      <h1>List of events coming</h1>
+      
+      {% for e in events %}
+        
+        <div class="card">
+          <div class="card-header">
+            {{e.0}}
+          </div>
+          <div class="card-body">
+            <p>{{e.1}}</p>
+            <p>{{e.2}}</p>
+            <p>{{e.3}}</p>
+            <p>Price : {{e.4}}</p>
+            <p>Organized By - {{ e.5 }}</p>
+            <a href="{% url "event" event_name=e.0 %}" class="btn btn-primary">View Event</a>
+          </div>
+        </div>
+        
+        
+        <br>
+        <br>
+      {% empty %}
+        <h4>No events coming up</h4>
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="page-header header-filter header-small" data-parallax="true" style="background-image:url('https://images.unsplash.com/photo-1514451380751-c374d1d0d4d7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ef50f5a6aaff1e84722fe5e0ee2ab22d&auto=format&fit=crop&w=2318&q=80 2318w');">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 ml-auto mr-auto text-center">
+            <h1 class="title">MUnite.</h1>
+            <h4>Providing a platform for a healthy MUN community for all MUN lovers out there
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main main-raised">
+      <div class="container">
+        <div class="pricing-2">
+          
+          <div class="row">
+    
+            <div class="col-md-4">
+              <div class="card card-pricing card-plain">
+                <div class="card-body">
+                  
+                  <h1 class="card-title">Organize</h1>
+                  <h6>Simplifying and automating the process of organizing an MUN</h6>
+                  <a href="{% url 'register' %}" class="btn btn-rose btn-raised btn-round">
+                    Get Started
+                  </a>
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-md-4">
+              <div class="card card-pricing card-raised bg-rose">
+                <div class="card-body">
+                
+                  <h1 class="card-title">Participate</h1>
+                  <h6>Participate and look forward to MUN events from all around the world</h6>
+                  <a href="{% url 'register' %}" class="btn btn-white btn-raised btn-round">
+                    Get Started
+                  </a>
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-md-4">
+              <div class="card card-pricing card-plain">
+                <div class="card-body">
+                  
+                  <h1 class="card-title">Compete</h1>
+                  <h6>Compete and engage with fellow MUNers and strive to build a healthy MUN community</h6>
+                  <a href="{% url 'register' %}" class="btn btn-rose btn-raised btn-round">
+                    Get Started
+                  </a>
+                </div>
+              </div>
+            </div>
+    
+          </div>
+        </div>
+        <hr>
+        <div class="features-2">
+          <div class="text-center2">
+            <h3 class="title">Frequently Asked Questions</h3>
+          </div>
+          <div class="row">
+            <div class="col-md-4 ml-auto" style="margin-left: 15%">
+              <div class="info info-horizontal">
+                <div class="icon icon-info">
+                  <i class="material-icons">card_membership</i>
+                </div>
+                <div class="description">
+                  <h4 class="info-title">What are MUNs and why should I participate?</h4>
+                  <p>Yes, you can cancel and perform other actions on your subscriptions via the My Account page. </p>
+                </div>
+              </div>
+    
+            </div>
+    
+            <div class="col-md-4 mr-auto">
+              <div class="info info-horizontal">
+                <div class="icon icon-success">
+                  <i class="material-icons">card_giftcard</i>
+                </div>
+                <div class="description">
+                  <h4 class="info-title">Is there any discount for organizing MUNs on this platform?</h4>
+                  <p>Yes, we offer a 40% discount if you choose annual subscription for any plan.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 ml-auto" style="margin-left: 15%">
+              <div class="info info-horizontal">
+                <div class="icon icon-success">
+                  <i class="material-icons">attach_money</i>
+                </div>
+                <div class="description">
+                  <h4 class="info-title">Which payment methods are accepted?</h4>
+                  <p>WooCommerce comes bundled with PayPal (for accepting credit card and PayPal account payments), BACS,
+                    and cash on delivery for accepting payments. </p>
+                </div>
+              </div>
+    
+            </div>
+    
+            <div class="col-md-4 mr-auto">
+              <div class="info info-horizontal">
+                <div class="icon icon-rose">
+                  <i class="material-icons">question_answer</i>
+                </div>
+                <div class="description">
+                  <h4 class="info-title">Any other questions we can answer?</h4>
+                  <p>We are happy to help you. Contact us.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+    
+    </div>
+    
+    {% endif %}
+
+  
+  <div class="contact1">
+    <div class="container-contact1">
+      <div class="contact1-pic js-tilt" data-tilt>
+        <img src="https://i.ibb.co/JkTczzP/img-01.png" alt="IMG">
+      </div>
+  
+      <form class="contact1-form validate-form">
+        <span class="contact1-form-title">
+          Get in touch
+        </span>
+  
+        <div class="wrap-input1 validate-input" data-validate="Name is required">
+          <input class="input1" type="text" name="name" placeholder="Name">
+          <span class="shadow-input1"></span>
+        </div>
+  
+        <div class="wrap-input1 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+          <input class="input1" type="text" name="email" placeholder="Email">
+          <span class="shadow-input1"></span>
+        </div>
+  
+        <div class="wrap-input1 validate-input" data-validate="Subject is required">
+          <input class="input1" type="text" name="subject" placeholder="Subject">
+          <span class="shadow-input1"></span>
+        </div>
+  
+        <div class="wrap-input1 validate-input" data-validate="Message is required">
+          <textarea class="input1" name="message" placeholder="Message"></textarea>
+          <span class="shadow-input1"></span>
+        </div>
+  
+        <div class="container-contact1-form-btn">
+          <button class="contact1-form-btn">
+            <span>
+              Send Email
+              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  
+  
+  
+  <!--===============================================================================================-->
+  
+  <script>
+    $('.js-tilt').tilt({
+      scale: 1.1
+    })
+  </script>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-23581568-13');
+  </script>
+  
+  <!--===============================================================================================-->
+  <script>
+
+  (function ($) {
+    "use strict";
+
+
+    /*==================================================================
+    [ Validate ]*/
+    var name = $('.validate-input input[name="name"]');
+    var email = $('.validate-input input[name="email"]');
+    var subject = $('.validate-input input[name="subject"]');
+    var message = $('.validate-input textarea[name="message"]');
+
+
+    $('.validate-form').on('submit', function () {
+      var check = true;
+
+      if ($(name).val().trim() == '') {
+        showValidate(name);
+        check = false;
+      }
+
+      if ($(subject).val().trim() == '') {
+        showValidate(subject);
+        check = false;
+      }
+
+
+      if ($(email).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+        showValidate(email);
+        check = false;
+      }
+
+      if ($(message).val().trim() == '') {
+        showValidate(message);
+        check = false;
+      }
+
+      return check;
+    });
+
+
+    $('.validate-form .input1').each(function () {
+      $(this).focus(function () {
+        hideValidate(this);
+      });
+    });
+
+    function showValidate(input) {
+      var thisAlert = $(input).parent();
+
+      $(thisAlert).addClass('alert-validate');
+    }
+
+    function hideValidate(input) {
+      var thisAlert = $(input).parent();
+
+      $(thisAlert).removeClass('alert-validate');
+    }
+
+
+
+  })(jQuery);
+  </script>
+
+  
+</body>
+
+</html>
+
+{% endblock %}

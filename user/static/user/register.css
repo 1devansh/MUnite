@@ -1,0 +1,395 @@
+.page-header {
+  position: relative;
+  height: auto;
+  min-height: 100vh;
+  background-size: cover;
+  margin-top: -10px;
+  padding: 0;
+  border: 0;
+  align-items: center;
+  z-index: 0;
+}
+
+.header-filter::before,
+.header-filter::after {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  left: 0;
+  top: 0;
+  content: "";
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.header-filter[filter-color="primary"]:after,
+.header-filter[filter-color="purple"]:after {
+  background: rgba(225, 190, 231, 0.56);
+  background: linear-gradient(
+    60deg,
+    rgba(225, 190, 231, 0.56),
+    rgba(186, 104, 200, 0.95)
+  );
+}
+
+.card {
+  border: 0;
+  margin-bottom: 30px;
+  margin-top: 135px;
+  border-radius: 6px;
+  color: rgba(0, 0, 0, 0.87);
+  background: #fff;
+  width: 100%;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  z-index: 2;
+}
+
+.card [class*="header-"] {
+  color: #fff;
+}
+
+h2.card-title {
+  margin-top: 0.625rem;
+  color: #3c4858;
+  text-decoration: none;
+  font-size: 2.25rem !important;
+  font-weight: 700 !important;
+  font-family: Roboto Slab, Times New Roman, serif;
+}
+
+.signup-page .card-signup {
+  border-radius: 6px;
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+    0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 100px;
+  padding: 40px 0;
+}
+
+.signup-page .social h4 {
+  margin-top: 20px;
+  font-weight: 300;
+}
+
+.signup-page .card-signup form .form-check {
+  padding-left: 20px;
+  margin-top: 15px;
+  margin-bottom: 8px;
+}
+
+.info {
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 70px 0 30px;
+}
+
+.info .info-title {
+  color: #3c4858;
+  margin: 1.75rem 0 0.875rem;
+  font-weight: 700;
+  font-family: Roboto Slab, Times New Roman, serif;
+}
+
+.info-horizontal .icon {
+  float: left;
+  margin-top: 24px;
+  margin-right: 10px;
+}
+
+.info-horizontal .icon > i {
+  font-size: 2.25rem;
+}
+
+.info-horizontal .description {
+  overflow: hidden;
+  font-weight: 300;
+}
+
+.icon.icon-rose {
+  color: #e91e63;
+}
+
+.icon.icon-primary {
+  color: #9c27b0;
+}
+
+.icon.icon-info {
+  color: #00bcd4;
+}
+
+.signup-page .info-horizontal {
+  padding: 0 0 20px;
+}
+
+.signup-page .card-signup form .form-check .form-check-label {
+  padding-left: 35px;
+  color: #aaa;
+  font-weight: 400;
+}
+
+a {
+  color: #3e3947;
+  text-decoration: none;
+}
+
+.description {
+  color: #999;
+}
+
+p {
+  margin: 0 0 10px;
+}
+
+/* input */
+
+.input-group .input-group-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.form-control {
+  font-size: 14px;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+  opacity: 1;
+  font-size: 14px !important;
+}
+
+.form-control::-moz-placeholder {
+  color: #aaaaaa;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #aaaaaa;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.form-control::-webkit-input-placeholder {
+  color: #aaaaaa;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.form-control,
+.is-focused .form-control {
+  background-image: linear-gradient(
+      to top,
+      #9c27b0 2px,
+      rgba(156, 39, 176, 0) 2px
+    ),
+    linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
+}
+
+.form-check .form-check-input {
+  opacity: 0;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+.form-check .form-check-label span {
+  display: block;
+  position: absolute;
+  left: 10px;
+  top: 0px;
+  transition-duration: 0.2s;
+}
+
+.form-check .form-check-sign {
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+  float: left;
+  padding-right: 10px;
+  display: inline-block;
+}
+
+
+
+.form-check .form-check-input:checked + .form-check-sign .check {
+  background: #9c27b0;
+}
+
+
+
+.form-check .form-check-input:checked + .form-check-sign .check:before {
+  color: #fff;
+  box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0 32px 0 20px,
+    -5px 5px 0 10px, 20px -12px 0 11px;
+}
+
+.form-check .form-check-sign .check:before {
+  position: absolute;
+  content: "";
+  transform: rotate(45deg);
+  display: block;
+  margin-top: -3px;
+  margin-left: 7px;
+  width: 0;
+  color: #fff;
+  height: 0;
+  box-shadow: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0,
+    inset 0 0 0 0;
+  animation: checkbox-off 0.3s forwards;
+}
+
+/* buttons */
+
+.btn {
+  position: relative;
+  padding: 12px 30px;
+  margin: 0.3125rem 1px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.428571;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  border: 0;
+  border-radius: 0.2rem;
+  outline: 0;
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1),
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: box-shadow, transform;
+  color: #fff;
+  background-color: #999;
+  border-color: #999;
+  box-shadow: 0 2px 2px 0 rgba(153, 153, 153, 0.14),
+    0 3px 1px -2px rgba(153, 153, 153, 0.2),
+    0 1px 5px 0 rgba(153, 153, 153, 0.12);
+}
+
+.btn.btn-just-icon {
+  font-size: 24px;
+  height: 41px;
+  min-width: 41px;
+  width: 41px;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  line-height: 41px;
+}
+
+.btn.btn-just-icon .fa {
+  margin-top: 0;
+  position: absolute;
+  width: 100%;
+  transform: none;
+  left: 0;
+  top: 0;
+  height: 100%;
+  line-height: 41px;
+  font-size: 20px;
+}
+
+.btn.btn-just-icon.btn-round {
+  border-radius: 50%;
+}
+
+.btn.btn-link {
+  box-shadow: none;
+}
+
+.btn.btn-primary {
+  color: #fff;
+  background-color: #9c27b0;
+  border-color: #9c27b0;
+  box-shadow: 0 2px 2px 0 rgba(156, 39, 176, 0.14),
+    0 3px 1px -2px rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12);
+}
+
+.btn.btn-primary.btn-link {
+  background-color: transparent;
+  color: #9c27b0;
+  box-shadow: none;
+}
+
+.btn.btn-primary.btn-link:hover,
+.btn.btn-primary.btn-link:focus,
+.btn.btn-primary.btn-link:active {
+  background-color: transparent;
+  color: #9c27b0;
+}
+
+.btn.btn-lg,
+.btn-group-lg > .btn,
+.btn-group-lg .btn {
+  padding: 1.125rem 2.25rem;
+  font-size: 0.875rem;
+  line-height: 1.333333;
+  border-radius: 0.2rem;
+}
+
+.btn.btn-round {
+  border-radius: 30px;
+}
+
+/* Social buttons */
+
+.btn.btn-twitter {
+  color: #fff;
+  background-color: #55acee;
+  border-color: #55acee;
+  box-shadow: 0 2px 2px 0 rgba(85, 172, 238, 0.14),
+    0 3px 1px -2px rgba(85, 172, 238, 0.2), 0 1px 5px 0 rgba(85, 172, 238, 0.12);
+}
+
+.btn.btn-twitter:hover {
+  color: #fff;
+  box-shadow: 0 14px 26px -12px rgba(85, 172, 238, 0.42),
+    0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(85, 172, 238, 0.2);
+}
+
+.btn.btn-dribbble {
+  color: #fff;
+  background-color: #ea4c89;
+  border-color: #ea4c89;
+  box-shadow: 0 2px 2px 0 rgba(234, 76, 137, 0.14),
+    0 3px 1px -2px rgba(234, 76, 137, 0.2), 0 1px 5px 0 rgba(234, 76, 137, 0.12);
+}
+
+.btn.btn-dribbble:hover {
+  color: #fff;
+  box-shadow: 0 14px 26px -12px rgba(234, 76, 137, 0.42),
+    0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(234, 76, 137, 0.2);
+}
+
+.btn.btn-facebook {
+  color: #fff;
+  background-color: #3b5998;
+  border-color: #3b5998;
+  box-shadow: 0 2px 2px 0 rgba(59, 89, 152, 0.14),
+    0 3px 1px -2px rgba(59, 89, 152, 0.2), 0 1px 5px 0 rgba(59, 89, 152, 0.12);
+}
+
+.btn.btn-facebook:hover {
+  color: #fff;
+  box-shadow: 0 14px 26px -12px rgba(59, 89, 152, 0.42),
+    0 4px 23px 0 rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(59, 89, 152, 0.2);
+}
+
+a:hover,
+a:focus,
+.btn:hover,
+.btn:focus {
+  color: #89229b;
+  text-decoration: none;
+}
+
+.container{
+  z-index: 10;
+}

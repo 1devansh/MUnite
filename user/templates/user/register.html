@@ -1,0 +1,104 @@
+{% extends "user/index.html" %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" type="text/css" href="{% static 'user/register.css' %}" />
+{% endblock %}
+{% load crispy_forms_tags %}
+{% block start %}
+
+<div class="page-header header-filter" filter-color="purple"
+  style="background-image: url('https://images.unsplash.com/photo-1502716197620-bf14ce1651b3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2d57ce6c1e3fd4734fe33f56a89e5192&auto=format&fit=crop&w=2500&q=80 2500w'); background-size: cover; background-position: top center;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 ml-auto mr-auto">
+        <div class="card card-signup">
+          <h2 class="card-title text-center">Register</h2>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-5 ml-auto">
+                <div class="info info-horizontal">
+                  <div class="icon icon-rose">
+                    <i class="material-icons">timeline</i>
+                  </div>
+                  <div class="description">
+                    <h4 class="info-title">Marketing</h4>
+                    <p class="description">
+                      We handle your marketing for you. Organize your MUN with our platform and you would receive attention from all users on our platform.
+                    </p>
+                  </div>
+                </div>
+  
+                <div class="info info-horizontal">
+                  <div class="icon icon-primary">
+                    <i class="material-icons">code</i>
+                  </div>
+                  <div class="description">
+                    <h4 class="info-title">Fully Automated Procedure</h4>
+                    <p class="description">
+                      We've developed the website for the sole purpose of automating the registration and organization phase of an MUN.
+                    </p>
+                  </div>
+                </div>
+  
+                <div class="info info-horizontal">
+                  <div class="icon icon-info">
+                    <i class="material-icons">group</i>
+                  </div>
+                  <div class="description">
+                    <h4 class="info-title">Build Audience</h4>
+                    <p class="description">
+                      Build your own audience who look forward to your event and make your reputation among your MUN circuit.
+                    </p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-md-5 mr-auto">
+                <div class="social text-center">
+                  <button class="btn btn-just-icon btn-round btn-twitter">
+                    <i class="fa fa-twitter"></i>
+                  </button>
+                  <button class="btn btn-just-icon btn-round btn-dribbble">
+                    <i class="fa fa-dribbble"></i>
+                  </button>
+                  <button class="btn btn-just-icon btn-round btn-facebook">
+                    <i class="fa fa-facebook"> </i>
+                  </button>
+                  <h4> or be classical </h4>
+                </div>
+  
+                <form class="form" method="POST">
+                  {% csrf_token %}
+                  <fieldset class="form-group">
+                    {{ form|crispy}}
+                  </fieldset>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary btn-round" style="size: 5px;">SIGN ME UP</a>
+                </div>
+                
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+<!--
+<div class="content-section col-md-8 col-md-offset-2">
+  <form method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
+    {% csrf_token %}
+    <fieldset class="form-group">
+      {{ form|crispy}}
+    </fieldset>
+    <center>
+      <button style="background: black; padding:2%; font-size: 2rem; color:white;" class="btn btn-outline-info" type="submit"><span class="glyphicon glyphicon-check"></span> &nbsp; Sign up</button>
+    </center>
+    <br />
+    <sub><a href="{% url 'login' %}" class="subtitle-text">Already have an account?</a></sub>
+  </form>
+</div>-->
+{% endblock start %}
