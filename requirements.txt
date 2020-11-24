@@ -1,6 +1,15 @@
 asgiref==3.2.10
-certifi==2020.6.20
+certifi==2020.11.8
+dj-database-url==0.5.0
 Django==3.1
 django-crispy-forms==1.9.2
+django-heroku==0.3.1
+django-simple-bulma==2.1.0
+gunicorn==20.0.4
+libsass==0.20.1
+Pillow==7.2.0
+psycopg2 @ file:///opt/concourse/worker/volumes/live/c8a4b965-959f-4e6c-7792-4aa881d63c8d/volume/psycopg2_1594305121341/work
 pytz==2020.1
+six==1.15.0
 sqlparse==0.3.1
+whitenoise==5.2.0
