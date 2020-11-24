@@ -1,24 +1,37 @@
 {% extends "user/index.html" %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'user/event.css' %}" />
+{% endblock %}
 {% load crispy_forms_tags %}
 {% block start %}
 
-<br><br><br>
-{% if user.is_authenticated %}
 
+{% if user.is_authenticated %}
+<div class="page-header header-filter" filter-color="purple"
+  style="background-image: url('https://images.unsplash.com/photo-1502716197620-bf14ce1651b3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2d57ce6c1e3fd4734fe33f56a89e5192&auto=format&fit=crop&w=2500&q=80 2500w'); background-size: cover; background-position: top center;">
 <div class="container">
-  <center>
-    <h2>Hey {{ user }} ! youre looking at</h2>
-    <h2>{{ title }}</h2>
-  </center>
-    <h2>Event Description - </h2>
-    <button type="submit" class="btn btn-danger" value="Register" name="submit">Register</button>
     <br>
-    <p><h4>{{event.0}}</h4></p>
-    <p><strong>Organization - </strong>{{event.1}}</p>
-    <p><strong>Scheduled Date - </strong>{{event.2}}</p>
-    <p><strong>Location - </strong>{{event.3}}</p>
-    <p><strong>Price - </strong>{{event.4}}</p>
-    <p><h5>Description: </h5>{{event.5}}</p>
+    <div class="card bg-dark text-white">
+      <img class="card-img" src="https://i.ibb.co/bNNKNKL/shutterstock-227595871.jpg" alt="MUN" style=";">
+      <div class="card-img-overlay">
+        <h2 class="card-title">{{event.0}}</h2>
+        <p class="card-text"><strong>Organization: </strong>{{event.1}}</p>
+        <p class="card-text"><strong>Scheduled Date: </strong>{{event.2}}</p>
+        <p class="card-text"><strong>Location - </strong>{{event.3}}</p>
+        <p class="card-text"><strong>Price - </strong>{{event.4}}</p>
+        <button type="submit" class="btn btn-danger" value="Register" name="submit">Register</button>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h2 class="card-title">Event Description</h2>
+        <p class="card-text">{{event.5}}</p>
+        
+      </div>
+    </div>
+    
   {% else %}
   <center>
     <p>{{username |title }} <a href="{% url "login" %}">Log in</a> Please</p>
@@ -26,7 +39,7 @@
 
 </div>
   {% endif %}
-
+</div>
 
 
 {% endblock %}

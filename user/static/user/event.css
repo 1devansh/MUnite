@@ -1,0 +1,10 @@
+.page-header {
+  height: auto;
+  margin: 0;
+  z-index: -2;
+}
+
+
+.container{
+  z-index: 2;
+}
