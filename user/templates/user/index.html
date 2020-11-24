@@ -119,7 +119,7 @@
             <div class="card-header">User logins in last 5 minutes</div>
             <div class="card-body text-info">
               {% for user in users %}
-              <h6 class="card-title">{{ user }}</h5>
+              <h6 class="card-title"><a href="{% url 'user' username=user %}">{{ user }}</a></h5>
                 {% endfor %}
             </div>
           </div>
