@@ -172,11 +172,11 @@ def committee(request, username):
 
     form = CommitteeForm(request.POST or None, request.FILES or None)
 
-    event_id = Event.objects.last().id
-    event_id += 1
+    #event_id = Event.objects.last().id
+    #event_id += 1
     if form.is_valid():
         form.save()
-    context['nei'] = event_id
+    #context['nei'] = event_id
     context['form'] = form
     return render(request, 'user/create_event.html', context)
 
