@@ -14,22 +14,22 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name',
-                  'email', 'phone_no', 'password1', 'password2']
+                'email', 'phone_no', 'password1', 'password2']
 
-
+'''
 class CommitteeForm(forms.ModelForm):
 
     class Meta:
         model = Committee
         exclude = ['event', 'id']
 
-
+'''
 
 class UserForm2(forms.ModelForm):
 
     class Meta:
         model = Delegate
-        fields = ('first_name', 'last_name', 'acheivement', 'name')
+        fields = ('first_name', 'last_name', 'acheivement')
 
 
 
@@ -38,6 +38,14 @@ class UserImageForm(forms.ModelForm):
     class Meta:
         model = Delegate
         fields = ('profile_pic',)
+
+
+class CommitteeForm(forms.ModelForm):
+
+    class Meta:
+        model = Committee
+        fields = ('name', 'numberOfRegistrations',
+                'committee_description', 'linkToBackgroundGuide')
 
 
 '''

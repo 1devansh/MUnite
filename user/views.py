@@ -9,7 +9,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.utils import timezone
 
-from .models import Delegate, Event
+from .models import Delegate, Event, Committee
 
 # INDEX
 
@@ -53,14 +53,29 @@ def save_event(request):
     date = request.POST.get('date')
     venue = request.POST.get('venue')
     price = request.POST.get('price')
+    numberOfCommittees = request.POST.get('noOfCommittees')
     description = request.POST.get('description')
-    Event.objects.create(core_organizer_id=id, event=event,
-                         organization=organization, date=date, venue=venue, price=price, description=description)
+    
+    created_event = Event.objects.create(core_organizer_id=id, event=event, organization=organization, date=date, venue=venue, price=price, numberOfCommittees=numberOfCommittees,description=description)
 
-    return redirect(index)  # redirects for index view to run
+    temp = []
+    integercount = int(numberOfCommittees)
+    for i in range(integercount):
+        temp.append(i+1)
+    event_iddd = created_event.id
+    print(event_iddd)
+    #print(event_id)
+    L = [event_iddd, event, price, numberOfCommittees, temp]
+    committeeForm = CommitteeForm()
+    throw_to_frontend = {
+        'info': L,
+        'committeeForm': committeeForm
+    }
+    return render(request, 'user/create_committee.html', throw_to_frontend)
+    #return redirect(index)  # redirects for index view to run
 
-# register here
 
+# REGISTER HERE
 
 def register(request):
     if request.method == 'POST':
@@ -135,7 +150,7 @@ def loggedin(request, username):
     name = fname + ' ' + lname
 
     imageForm = UserImageForm()
-    userEditForm = UserForm2()
+    userEditForm = UserForm2(data={'first_name': request.user.first_name, 'last_name': request.user.last_name, 'acheivement': acheivements})
 
     throw_to_frontend = {
         'title': 'Profile',
@@ -157,11 +172,36 @@ def committee(request, username):
 
     form = CommitteeForm(request.POST or None, request.FILES or None)
 
+    event_id = Event.objects.last().id
+    event_id += 1
     if form.is_valid():
         form.save()
-
+    context['nei'] = event_id
     context['form'] = form
     return render(request, 'user/create_event.html', context)
+
+
+#   COMMITTEE SAVING IN DATABASE
+
+def save_committee(request, event_id):
+    if request.method == 'POST':
+        committee_info_form = CommitteeForm(data=request.POST, instance=request.user)
+
+        if committee_info_form.is_valid():
+
+            name = committee_info_form.cleaned_data['name']
+            registrations = committee_info_form.cleaned_data['numberOfRegistrations']
+            committee_description = committee_info_form.cleaned_data['committee_description']
+            link_to_BG = committee_info_form.cleaned_data['linkToBackgroundGuide']
+
+            event_instance = Event.objects.get(pk=event_id)
+            Committee.objects.create(event=event_instance, name=name, numberOfRegistrations=registrations, committee_description=committee_description, linkToBackgroundGuide=link_to_BG)
+
+
+        else:
+            print(update_user_form.errors)
+    
+    return redirect(f"/user/{request.user.username}")
 
 
 # EDITING USER PROFILE PICTURE
@@ -203,7 +243,6 @@ def edit_user_info(request):
         if update_user_form.is_valid():
             user_profile.first_name = update_user_form.cleaned_data['first_name']
             user_profile.last_name = update_user_form.cleaned_data['last_name']
-            user_profile.name = update_user_form.cleaned_data['name']
             user_profile.acheivement = update_user_form.cleaned_data['acheivement']
         
             user_profile.save()

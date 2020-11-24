@@ -24,7 +24,7 @@ class Event(models.Model):
   venue = models.CharField(max_length=200)
   price = models.IntegerField()
   description = models.CharField(max_length=2000)
-  
+  numberOfCommittees = models.IntegerField(default=0)
 
   def __str__(self):
     return self.event

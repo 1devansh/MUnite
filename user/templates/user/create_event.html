@@ -33,10 +33,11 @@
 <div class="page-header header-filter" filter-color="purple"
   style="background-image: url('https://images.unsplash.com/photo-1502716197620-bf14ce1651b3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2d57ce6c1e3fd4734fe33f56a89e5192&auto=format&fit=crop&w=2500&q=80 2500w'); background-size: cover; background-position: top center;">
   <div class="container">
+    
   {% if user.is_authenticated %}
     <h2>Create your own MUN Event</h2>
     <br>
-    <form class="form" id="event-form" action="/submitted" method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
+    <form class="form" id="event-form" action="{% url 'save_event' %}" method="POST" style="border: 1px solid black; margin: 4%; padding:10%; border-radius:1%;">
       {% csrf_token %}
       <div class="form-group">
         <label for="event">Event name:</label>
@@ -61,6 +62,11 @@
       <div class="form-group">
         <label for="price">Registration Price per head: </label>
         <input class="form-control" type="number" id="price" name="price" placeholder="Price"><br>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Number of Committees: </label><br>
+        <textarea class="form-control" type="number" id="noOfCommittees" name="noOfCommittees" placeholder="For example. 5"></textarea><br>
       </div>
 
       <div class="form-group">
