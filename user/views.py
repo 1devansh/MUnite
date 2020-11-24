@@ -10,6 +10,7 @@ from django.template import Context
 from django.utils import timezone
 
 from .models import Delegate, Event, Committee
+from django.contrib.auth.models import User
 
 # INDEX
 
@@ -18,6 +19,24 @@ def index(request):
     all_events = Event.objects.all().order_by('-date')
     D = []
     myEvents = []
+
+
+    ## Last Logged in users
+
+    #count = Delegate.objects.count()
+    all_users = User.objects.all()
+
+    user_list=[]
+    check = timezone.now() + timezone.timedelta(minutes=-15)
+
+    for user in all_users:
+        if user.last_login is None:
+            user.last_login = timezone.now()
+        
+        if (user.last_login >= check) and (user.is_authenticated) :
+            user_list.append(user)
+
+
     for i in all_events:
         organizer = i.core_organizer
         event = i.event
@@ -35,6 +54,7 @@ def index(request):
     throw_to_frontend = {
         'events': D,
         'myEvents': myEvents,
+        'users': user_list
     }
     return render(request, 'user/index.html', throw_to_frontend)
 
