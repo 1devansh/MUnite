@@ -48,6 +48,12 @@ class CommitteeForm(forms.ModelForm):
                 'committee_description', 'linkToBackgroundGuide')
 
 
+class Edit_event_info(forms.ModelForm):
+
+    class Meta:
+        model = Event
+        fields = ('organization', 'date', 'venue', 'price', 'description')
+
 '''
 class UpdateProfile(forms.ModelForm):
     username = forms.CharField(required=True)
